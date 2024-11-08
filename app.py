@@ -13,6 +13,7 @@ app = FastAPI()
 
 # Download nltk punkt for sentence tokenization
 nltk.download("punkt")
+nltk.download('punkt_tab')
 
 torch.set_num_threads(1)
 
