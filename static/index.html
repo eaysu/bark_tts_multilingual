@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multilingual Text-to-Speech with Bark</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Multilingual Text-to-Speech with Bark</h1>
+        
+        <textarea id="text" placeholder="Type something to synthesize..."></textarea>
+        
+        <select id="model">
+            <option value="suno/bark">suno/bark</option>
+            <option value="suno/bark-small">suno/bark-small</option>
+        </select>
+        
+        <select id="voicePreset">
+            <option value="v2/en_speaker_0">v2/en_speaker_0</option>
+            <option value="v2/en_speaker_1">v2/en_speaker_1</option>
+            <option value="v2/en_speaker_2">v2/en_speaker_2</option>
+            <option value="v2/en_speaker_3">v2/en_speaker_3</option>
+            <option value="v2/en_speaker_4">v2/en_speaker_4</option>
+            <option value="v2/en_speaker_5">v2/en_speaker_5</option>
+            <option value="v2/en_speaker_6">v2/en_speaker_6</option>
+            <option value="v2/en_speaker_7">v2/en_speaker_7</option>
+            <option value="v2/en_speaker_8">v2/en_speaker_8</option>
+            <option value="v2/en_speaker_9">v2/en_speaker_9</option>
+        
+            <option value="v2/tr_speaker_0">v2/tr_speaker_0</option>
+            <option value="v2/tr_speaker_1">v2/tr_speaker_1</option>
+            <option value="v2/tr_speaker_2">v2/tr_speaker_2</option>
+            <option value="v2/tr_speaker_3">v2/tr_speaker_3</option>
+            <option value="v2/tr_speaker_4">v2/tr_speaker_4</option>
+            <option value="v2/tr_speaker_5">v2/tr_speaker_5</option>
+            <option value="v2/tr_speaker_6">v2/tr_speaker_6</option>
+            <option value="v2/tr_speaker_7">v2/tr_speaker_7</option>
+            <option value="v2/tr_speaker_8">v2/tr_speaker_8</option>
+            <option value="v2/tr_speaker_9">v2/tr_speaker_9</option>
+        
+            <option value="v2/de_speaker_0">v2/de_speaker_0</option>
+            <option value="v2/de_speaker_1">v2/de_speaker_1</option>
+            <option value="v2/de_speaker_2">v2/de_speaker_2</option>
+            <option value="v2/de_speaker_3">v2/de_speaker_3</option>
+            <option value="v2/de_speaker_4">v2/de_speaker_4</option>
+            <option value="v2/de_speaker_5">v2/de_speaker_5</option>
+            <option value="v2/de_speaker_6">v2/de_speaker_6</option>
+            <option value="v2/de_speaker_7">v2/de_speaker_7</option>
+            <option value="v2/de_speaker_8">v2/de_speaker_8</option>
+            <option value="v2/de_speaker_9">v2/de_speaker_9</option>
+        
+            <option value="v2/fr_speaker_0">v2/fr_speaker_0</option>
+            <option value="v2/fr_speaker_1">v2/fr_speaker_1</option>
+            <option value="v2/fr_speaker_2">v2/fr_speaker_2</option>
+            <option value="v2/fr_speaker_3">v2/fr_speaker_3</option>
+            <option value="v2/fr_speaker_4">v2/fr_speaker_4</option>
+            <option value="v2/fr_speaker_5">v2/fr_speaker_5</option>
+            <option value="v2/fr_speaker_6">v2/fr_speaker_6</option>
+            <option value="v2/fr_speaker_7">v2/fr_speaker_7</option>
+            <option value="v2/fr_speaker_8">v2/fr_speaker_8</option>
+            <option value="v2/fr_speaker_9">v2/fr_speaker_9</option>
+        
+            <option value="v2/it_speaker_0">v2/it_speaker_0</option>
+            <option value="v2/it_speaker_1">v2/it_speaker_1</option>
+            <option value="v2/it_speaker_2">v2/it_speaker_2</option>
+            <option value="v2/it_speaker_3">v2/it_speaker_3</option>
+            <option value="v2/it_speaker_4">v2/it_speaker_4</option>
+            <option value="v2/it_speaker_5">v2/it_speaker_5</option>
+            <option value="v2/it_speaker_6">v2/it_speaker_6</option>
+            <option value="v2/it_speaker_7">v2/it_speaker_7</option>
+            <option value="v2/it_speaker_8">v2/it_speaker_8</option>
+            <option value="v2/it_speaker_9">v2/it_speaker_9</option>
+        
+            <option value="v2/zh_speaker_0">v2/zh_speaker_0</option>
+            <option value="v2/zh_speaker_1">v2/zh_speaker_1</option>
+            <option value="v2/zh_speaker_2">v2/zh_speaker_2</option>
+            <option value="v2/zh_speaker_3">v2/zh_speaker_3</option>
+            <option value="v2/zh_speaker_4">v2/zh_speaker_4</option>
+            <option value="v2/zh_speaker_5">v2/zh_speaker_5</option>
+            <option value="v2/zh_speaker_6">v2/zh_speaker_6</option>
+            <option value="v2/zh_speaker_7">v2/zh_speaker_7</option>
+            <option value="v2/zh_speaker_8">v2/zh_speaker_8</option>
+            <option value="v2/zh_speaker_9">v2/zh_speaker_9</option>
+        </select>
+        
+
+        <button id="generateBtn">Generate Voice</button>
+        
+        <div id="audioContainer" class="audio-container">
+            <audio id="audioPlayer" controls></audio>
+            <button id="downloadBtn" style="display: none;">Download Audio</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("generateBtn").addEventListener("click", async () => {
+            const text = document.getElementById("text").value;
+            const model = document.getElementById("model").value;
+            const voicePreset = document.getElementById("voicePreset").value;
+
+            const formData = new FormData();
+            formData.append("text", text);
+            formData.append("model_name", model);
+            formData.append("voice_preset", voicePreset);
+
+            document.getElementById("generateBtn").textContent = "Generating...";
+            document.getElementById("generateBtn").disabled = true;
+
+            const response = await fetch("/generate", {
+                method: "POST",
+                body: formData,
+            });
+            const result = await response.json();
+
+            document.getElementById("generateBtn").textContent = "Generate Voice";
+            document.getElementById("generateBtn").disabled = false;
+
+            const audioPlayer = document.getElementById("audioPlayer");
+            audioPlayer.src = result.file_path;
+            audioPlayer.style.display = "block";
+
+            const downloadBtn = document.getElementById("downloadBtn");
+            downloadBtn.style.display = "inline-block";
+            downloadBtn.href = result.file_path;
+            downloadBtn.download = "generated_voice.wav";
+        });
+    </script>
+</body>
+</html>

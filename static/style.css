@@ -1,0 +1,84 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #2b2b2b;
+    color: #ffffff;
+}
+
+.container {
+    text-align: center;
+    padding: 2rem;
+    background-color: #333;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 100%;
+}
+
+h1 {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+textarea, select, button {
+    width: 100%;
+    padding: 0.8rem;
+    margin: 0.8rem 0;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+}
+
+textarea {
+    resize: none;
+    height: 100px;
+}
+
+button {
+    cursor: pointer;
+    background-color: #555;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #777;
+}
+
+.audio-container {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+audio {
+    width: 100%;
+    margin-top: 1rem;
+    outline: none;
+}
+
+#downloadBtn {
+    background-color: #555;
+    padding: 0.5rem 1rem;
+    color: white;
+    font-size: 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+#downloadBtn:hover {
+    background-color: #777;
+}
