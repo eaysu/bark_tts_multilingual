@@ -14,7 +14,7 @@ To run the FastAPI server:
 
 ## How to Use the Web Interface
 
-Enter Text: Type the text you want to convert into speech in the provided input box.
-Select Model: Choose between the available models (suno/bark and suno/bark-small) based on your requirements.
-Choose Voice Preset: Select from a variety of voice presets in different languages and accents.
-Generate Speech: Click the "Generate" button. The generated audio file will be saved and made available for download.
+- Enter Text: Type the text you want to convert into speech in the provided input box.
+- Select Model: Choose between the available models (suno/bark and suno/bark-small) based on your requirements.
+- Choose Voice Preset: Select from a variety of voice presets in different languages and accents.
+- Generate Speech: Click the "Generate" button. The generated audio file will be saved and made available for download.
