@@ -58,12 +58,14 @@ def generate_speech(text, model_name, voice_preset):
     silence = np.zeros(int(silence_duration * SAMPLE_RATE))
     audio_pieces = []
 
+    # Better results for if text occurs more than 1 sentence
     for sentence in sentences:
         inputs = processor(sentence, voice_preset=voice_preset)
         audio_array = model.generate(**inputs).cpu().numpy().squeeze()
         audio_pieces.append(audio_array)
         audio_pieces.append(silence.copy())  # Add silence between sentences
 
+    # Concatenate audio pieces into one audio
     full_audio = np.concatenate(audio_pieces)
     file_path = os.path.join(OUTPUT_DIR, "generated_voice.wav")
     write(file_path, SAMPLE_RATE, full_audio)
