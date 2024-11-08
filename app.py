@@ -19,9 +19,10 @@ nltk.download('punkt_tab')
 torch.set_num_threads(1)
 
 # Load models
+device = "cuda" if torch.cuda.is_available() else "cpu"
 models = {
-    "suno/bark": BarkModel.from_pretrained("suno/bark").to("cuda"),
-    "suno/bark-small": BarkModel.from_pretrained("suno/bark-small").to("cuda")
+    "suno/bark": BarkModel.from_pretrained("suno/bark").to(device),
+    "suno/bark-small": BarkModel.from_pretrained("suno/bark-small").to(device)
 }
 
 # Voice presets
@@ -62,7 +63,7 @@ def generate_speech(text, model_name, voice_preset):
 
     # Better results for if text occurs more than 1 sentence
     for sentence in sentences:
-        inputs = processor(sentence, voice_preset=voice_preset).to("cuda")
+        inputs = processor(sentence, voice_preset=voice_preset).to(device)
         audio_array = model.generate(**inputs).cpu().numpy().squeeze()
         audio_pieces.append(audio_array)
         audio_pieces.append(silence.copy())  # Add silence between sentences
