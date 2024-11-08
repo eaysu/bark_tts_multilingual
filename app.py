@@ -1,7 +1,8 @@
-from fastapi import FastAPI, Form
+from fastapi import FastAPI, Form, HTTPException
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 import numpy as np
+import uvicorn
 import nltk
 import torch
 from transformers import AutoProcessor, BarkModel
@@ -84,10 +85,12 @@ async def generate(text: str = Form(...), model_name: str = Form(...), voice_pre
 
 @app.get("/download")
 async def download(file_path: str):
-    # Verify that the file exists in the output directory before serving it
     if os.path.isfile(file_path) and file_path.startswith(OUTPUT_DIR):
         return FileResponse(file_path, media_type="audio/wav", filename="generated_voice.wav")
-    return {"error": "File not found."}
+    raise HTTPException(status_code=404, detail="File not found.")
 
 # Serve static files for CSS and JS
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=5000)
