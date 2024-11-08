@@ -1,7 +1,6 @@
 from fastapi import FastAPI, Form
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
-from typing import Optional
 import numpy as np
 import nltk
 import torch
